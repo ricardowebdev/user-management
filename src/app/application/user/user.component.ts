@@ -93,7 +93,7 @@ export class UserComponent implements OnInit {
         this.id.setValue(user.id);
         this.name.setValue(user.name);
         this.email.setValue(user.email);
-        this.profile.setValue(user.profile);]
+        this.profile.setValue(user.profile);
         this.oldPassword.setValue(user.password);
     }
 
@@ -103,7 +103,7 @@ export class UserComponent implements OnInit {
 
     confirmDelete() {
         try {
-            const id = this.users.indexOf(user => user.id == this.selectUser.id);
+            const id = this.users.indexOf(user => user.id == this.selectedUser.id);
             if(!id)
                 throw new Error("Usuário selecionado não encontrado");
 
