@@ -8,3 +8,9 @@ Também deve ser possível ter um controle por nivel de perfil (Usuário / Admin
 Também é necessario possuir um login para proteger a aplicação.
 
 A aplicação foi construida utilizando o Angular 7 + material design bootstrap para Angular
+
+link do Material design for bootstrap:
+<a href="https://mdbootstrap.com/docs/angular">mdbootstrap</a><br>
+
+Para acessar a aplicação clique <a href="https://ricardowebdev.github.io/user-management/docs/"><b>Aqui</b></a><br>
+
