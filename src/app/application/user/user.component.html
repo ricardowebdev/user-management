@@ -1,0 +1,192 @@
+<section *ngIf="page == 'list'">
+	<div class="row">
+		<div class="col-md-1"></div>
+
+		<div class="col text-center">
+			<h1 class="text-center">Cadastro de Usuarios</h1>
+		</div>
+
+		<div class="col-md-2 text-right">
+			<button class="btn btn-primary btn-sm" (click)="changePage('single')">
+				<i class="fa fa-plus"></i> Adicionar
+			</button>
+		</div>	
+
+		<div class="col-md-1"></div>
+    </div><br>
+    
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">            
+            <div class="md-form">
+                <input mdbInputDirective
+                       type="text"
+                       class="form-control"
+                       #userSearch
+                       id="userSearch"
+                       name="userSearch"
+                       (keyup)="findUser(userSearch.value)" />
+                <label for="userSearch"><i class="fa fa-search"></i> Buscar por nome</label>
+            </div>
+        </div>
+    </div>
+
+	<div *ngFor="let user of filteredUsers">
+		<div class="row justify-content-center">	
+			<div class="col-md-10">
+				<mdb-card>
+				    <mdb-card-body>
+					    <mdb-card-title>
+					        <h5>{{ user.name }}</h5>
+					    </mdb-card-title>
+				        <mdb-card-text>
+				        	<div class="row">
+				        		<div class="col-md-4">
+						        	<b>E-mail: </b> {{ user.email }}	        			
+                                </div>
+                                
+				        		<div class="col-md-4">
+									<b>Perfil: </b> {{ user.profile == 1 ? 'Administrador' : 'Usuário' }}		        			
+				        		</div>
+
+                                <div class="col-md-4">
+							    	<a class="btn btn-yellow btn-sm card-link" (click)="changePage('single'); selectUser(user)">
+							    		<i class="fa fa-edit"></i> Editar
+							    	</a>
+							    	<a class="btn btn-danger btn-sm card-link" 
+							    	   (click)=" callDelete(user); basicModal.show()">
+							    		<i class="fa fa-trash"></i> Deletar
+							    	</a>							
+								</div>		        		
+				        	</div>
+				    	</mdb-card-text>
+				  	</mdb-card-body>
+				</mdb-card>
+			</div>
+		</div><br>	
+	</div>	
+</section>
+
+<section *ngIf="page == 'single'">
+	<div class="row">
+		<div class="col text-center">
+			<h1 class="text-center">Usuários</h1>
+		</div>
+	</div><br>
+
+	<div class="row justify-content-center">	
+		<div class="col-md-10">
+			<mdb-card>
+			    <mdb-card-body>
+					<form [formGroup]="form">
+                        <input type="hidden" 
+                               id="id" 
+                               [formControl]="id" />
+
+                        <input type="hidden" 
+                               id="oldPassword" 
+                               [formControl]="oldPassword" />
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="md-form">
+								    <input mdbInputDirective 
+								    	   type="text" 
+								    	   id="name" 
+								    	   class="form-control" 
+								    	   [formControl]="name" />
+								    <label for="name">Nome</label>
+								</div>
+							</div>
+
+						    <div class="col-md-4">
+                                <div class="md-form">
+                                    <input mdbInputDirective 
+                                            type="email" 
+                                            id="email" 
+                                            class="form-control" 
+                                            [formControl]="email" />
+                                    <label for="email">E-mail</label>
+                                </div>        
+						  	</div>
+						</div><br>
+
+						<div class="row">
+							<div class="col-md-4">
+                                <label for="profile">Profile</label>								
+                                <select name="profile" 
+                                        id="profile" 
+                                        class="form-control"
+                                        [formControl]="profile">
+                                    <option value="">Selecione</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Usuario</option>
+                                </select>
+							</div>
+
+							<div class="col-md-4">
+								<div class="md-form">
+								    <input mdbInputDirective 
+								    	   type="password" 
+								    	   id="password" 
+								    	   class="form-control" 
+								    	   [formControl]="password" />
+								    <label for="password">Password</label>								
+								</div>
+							</div>
+						</div>
+
+				    	<div class="row justify-content-right">
+				    		<div class="col-md-12 text-right">
+						    	<a class="btn btn-danger btn-sm" (click)="changePage('list')">
+						    		<i class="fa fa-arrow-left"></i> Voltar
+						    	</a>			    			
+
+						    	<a class="btn btn-success btn-sm" (click)="confirmForm()">
+						    		<i class="fa fa-check"></i> Confirmar
+						    	</a>
+				    		</div>			    		
+                        </div>
+                        						
+					</form>
+			    </mdb-card-body>
+			</mdb-card>
+		</div>
+	</div>
+</section>
+
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          			<span aria-hidden="true">×</span>
+        		</button>
+        		<h4 class="modal-title w-100" id="myModalLabel">Exclusão de usuários</h4>
+      		</div>
+      		<div class="modal-body">
+        		Tem certeza de que deseja excluir este Usuário?
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" 
+        				mdbBtn 
+        				color="danger"
+        				class="waves-light btn-sm"
+        				aria-label="Close"
+        				(click)="basicModal.hide()"
+        				mdbWavesEffect>
+        			<i class="fa fa-remove"></i> Fechar
+        		</button>
+        		<button type="button" 
+        				mdbBtn 
+        				color="success" 
+        				class="relative waves-light btn-sm" 
+        				mdbWavesEffect
+        				(click)="confirmDelete(); basicModal.hide()">
+        			<i class="fa fa-check"></i> Confirmar
+        		</button>
+      		</div>
+    	</div>
+  	</div>
+</div>

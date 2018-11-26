@@ -1,0 +1,24 @@
+<div class="container-fluid full">
+  <div class="row">
+    <div class="col-12">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo scrolling-navbar text-left">
+        <mdb-navbar-brand><a class="navbar-brand" href="#">Gerenciamento de Usuários</a></mdb-navbar-brand>
+        <links>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {{ activeMovie }}" >
+                    <a class="nav-link waves-light" mdbWavesEffect>Dashboard</a>
+                </li>
+                
+                <li class="nav-item {{ activeRentals }}">
+                    <a class="nav-link waves-light" mdbWavesEffect>Usuarios</a>
+                </li>
+            </ul>
+            <span class="navbar-text white-text text-right">
+                Sair
+            </span>        
+        </links>
+    </mdb-navbar>    		
+    </div>
+  </div>
+  <app-user></app-user>
+</div>
