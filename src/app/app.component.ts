@@ -13,4 +13,9 @@ export class AppComponent {
 		window.localStorage.setItem("username", user.name);
 		window.localStorage.setItem("profile",  user.profile);
 	}
+
+	logout() {
+		this.logged = false;
+		window.localStorage.clear();
+	}
 }

@@ -429,6 +429,9 @@ MIT
 @angular/forms
 MIT
 
+@angular/router
+MIT
+
 @angular/http
 MIT
 
