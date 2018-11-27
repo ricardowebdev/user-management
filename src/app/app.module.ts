@@ -29,7 +29,7 @@ import { LoginComponent             } from './application/login/login.component'
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    SharedModule    
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],

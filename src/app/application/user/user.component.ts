@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, 
-         FormGroup, 
+import { FormControl,
+         FormGroup,
          Validators        } from '@angular/forms';
 
 import { UserService       } from './user.service';
@@ -19,79 +19,79 @@ export class UserComponent implements OnInit {
     page:          string;
     base = new Base();
 
-    constructor(private service: UserService) { }
+    form = new FormGroup({
+        id: new FormControl('', []),
 
-    ngOnInit() {
-        this.page         = 'list';
-        this.selectedUser = {};        
-        this.loadUsers();
-        this.userProfile  = parseInt(window.localStorage.getItem('profile')) || 2;
-    }
+        name: new FormControl('', [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(50)
+        ]),
 
-	form = new FormGroup({
-		id: new FormControl('', []),
-
-		name: new FormControl('', [
-			Validators.required,
-			Validators.minLength(3),
-			Validators.maxLength(50)
-		]),
-
-		password: new FormControl('', [
-			Validators.required,
+        password: new FormControl('', [
+            Validators.required,
             Validators.minLength(3),
             Validators.maxLength(50),
         ]),
-        
+
         oldPassword: new FormControl('', [
             Validators.minLength(3),
             Validators.maxLength(50),
         ]),
 
-		profile: new FormControl('', [
-			Validators.required			
-		]),
+        profile: new FormControl('', [
+            Validators.required
+        ]),
 
-		email: new FormControl('', [
+        email: new FormControl('', [
             Validators.required,
             Validators.minLength(5),
             Validators.email
-		]),		
-    }); 
-    
-	get id() {
-		return this.form.get('id');
-	}
+        ]),
+    });
 
-	get name() {
-		return this.form.get('name');
-	}
+    constructor(private service: UserService) { }
 
-	get profile() {
-		return this.form.get('profile');
-	}
-
-	get password() {
-		return this.form.get('password');
+    ngOnInit() {
+        this.page         = 'list';
+        this.selectedUser = {};
+        this.loadUsers();
+        this.userProfile  = parseInt(window.localStorage.getItem('profile'), 2) || 2;
     }
-    
-	get email() {
-		return this.form.get('email');
+
+    get id() {
+        return this.form.get('id');
     }
-    
+
+    get name() {
+        return this.form.get('name');
+    }
+
+    get profile() {
+        return this.form.get('profile');
+    }
+
+    get password() {
+        return this.form.get('password');
+    }
+
+    get email() {
+        return this.form.get('email');
+    }
+
     get oldPassword() {
         return this.form.get('oldPassword');
     }
 
     loadUsers() {
         this.users = this.service.listUsers();
-        this.filteredUsers = this.users;        
+        this.filteredUsers = this.users;
     }
 
     changePage(page) {
         this.page = page;
         this.filteredUsers = this.users;
-		this.form.reset();
+        this.form.reset();
     }
 
     selectUser(user) {
@@ -108,37 +108,37 @@ export class UserComponent implements OnInit {
     }
 
     confirmDelete() {
-        let result = this.service.removeUser(this.users, this.selectedUser);
+        const result = this.service.removeUser(this.users, this.selectedUser);
 
-        if(typeof(result) == "string") {
-            this.base.setAlert(result, "danger");
+        if (typeof(result) === 'string') {
+            this.base.setAlert(result, 'danger');
         } else {
             window.scrollTo(0, 0);
-            this.base.setAlert("Usuario removido com sucesso", "success");
+            this.base.setAlert('Usuario removido com sucesso', 'success');
             this.users = result;
         }
     }
 
     confirmForm() {
-        if(this.id.value !== null || this.id.value > 0) {
+        if (this.id.value !== null || this.id.value > 0) {
             const result = this.service.editUser(this.users, this.form.value);
 
-            if(typeof(result) == "string") {
-               this.base.setAlert(result, "danger"); 
+            if (typeof(result) === 'string') {
+               this.base.setAlert(result, 'danger');
             } else {
                 this.users = result;
-                this.base.setAlert("Usuário Alterado com sucesso", "success");
-                this.changePage('list');                
+                this.base.setAlert('Usuário Alterado com sucesso', 'success');
+                this.changePage('list');
             }
-        } else {               
+        } else {
             const result = this.service.saveUser(this.users, this.form.value);
 
-            if(typeof(result) == "string") {
-                this.base.setAlert(result, "danger");
+            if (typeof(result) === 'string') {
+                this.base.setAlert(result, 'danger');
             } else {
                 this.users = result;
                 this.changePage('list');
-                this.base.setAlert("Usuário inserido com sucesso", "success");
+                this.base.setAlert('Usuário inserido com sucesso', 'success');
             }
         }
     }
@@ -146,23 +146,25 @@ export class UserComponent implements OnInit {
     findUser(userName) {
         this.base.closeAlert();
 
-        if(userName == "" || userName == null) {
+        if (userName === '' || userName == null) {
             this.filteredUsers = this.users;
         } else {
             this.filteredUsers = [];
-            let size = userName.length;
-            userName = userName.toLowerCase();
+            const size = userName.length;
+            userName   = userName.toLowerCase();
 
-            for(let i in this.users) {
-                let parse = this.users[i].name.substr(0, size);
-                    parse = parse.toLowerCase();
+            for (const user of this.users) {
+                let parse = user.name.substr(0, size);
+                parse = parse.toLowerCase();
 
-                if (parse == userName)
-                    this.filteredUsers.push(this.users[i]);
+                if (parse === userName) {
+                    this.filteredUsers.push(user);
+                }
             }
-            
-            if(!this.filteredUsers.length)
-                this.base.setAlert("Nenhum usuário encontrado", "warning");
+
+            if (!this.filteredUsers.length) {
+                this.base.setAlert('Nenhum usuário encontrado', 'warning');
+            }
         }
     }
 }

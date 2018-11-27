@@ -7,7 +7,7 @@ import { AlertComponent             } from './alert/alert.component';
 
 @NgModule({
   declarations: [
-    AlertComponent  
+    AlertComponent
   ],
   imports: [
     BrowserModule,
