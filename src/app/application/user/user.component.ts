@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './user.service';
 import { FormControl, 
          FormGroup, 
          Validators        } from '@angular/forms';
+
+import { UserService       } from './user.service';
+import { Base              } from '../../common/base.class';
 
 @Component({
   selector: 'app-user',
@@ -14,6 +16,7 @@ export class UserComponent implements OnInit {
     selectedUser:  any;
     filteredUsers: any;
     page:          string;
+    base = new Base();
 
     constructor(private service: UserService) { }
 
@@ -49,7 +52,8 @@ export class UserComponent implements OnInit {
 
 		email: new FormControl('', [
             Validators.required,
-            Validators.minLength(5)
+            Validators.minLength(5),
+            Validators.email
 		]),		
     }); 
     
@@ -102,58 +106,44 @@ export class UserComponent implements OnInit {
     }
 
     confirmDelete() {
-        try {
-            const id = this.users.indexOf(user => user.id == this.selectedUser.id);
-            if(!id)
-                throw new Error("Usuário selecionado não encontrado");
+        let result = this.service.removeUser(this.users, this.selectedUser);
 
-            this.users.splice(id, 1);
-        } catch(err) {
-            console.log(err.message);
-        }    
+        if(typeof(result) == "string") {
+            this.base.setAlert(result, "danger");
+        } else {
+            window.scrollTo(0, 0);
+            this.base.setAlert("Usuario removido com sucesso", "success");
+            this.users = result;
+        }
     }
 
     confirmForm() {
         if(this.id.value !== null || this.id.value > 0) {
-            const user = this.users.find(user => user.id === this.id.value);
-            if(!user) {
-                console.log("Usuário não encontrado");
-                return;
+            const result = this.service.editUser(this.users, this.form.value);
+
+            if(typeof(result) == "string") {
+               this.base.setAlert(result, "danger"); 
+            } else {
+                this.users = result;
+                this.base.setAlert("Usuário Alterado com sucesso", "success");
+                this.changePage('list');                
             }
+        } else {               
+            const result = this.service.saveUser(this.users, this.form.value);
 
-            let password = this.oldPassword.value;
-
-            if (this.password.value != "")
-                password = this.password.value;
-
-            user.name     = this.name.value;
-            user.email    = this.email.value;
-            user.profile  = this.profile.value;
-            user.password = password;
-            console.log("Usuário Alterado com sucesso");
-            this.changePage('list');
-        } else {
-            if (this.checkUnique(this.email.value)) {
-                console.log('Usuário já existe no sistema');
-                return false;
+            if(typeof(result) == "string") {
+                this.base.setAlert(result, "danger");
+            } else {
+                this.users = result;
+                this.changePage('list');
+                this.base.setAlert("Usuário inserido com sucesso", "success");
             }
-            
-            this.users.push(this.form.value);
-            this.changePage('list');
-            console.log('Usuário inserido com sucesso');
         }
     }
 
-    checkUnique(email) {
-        const user = this.users.find(user => user.email == email);
-        
-        if(user)
-            return true;
-
-        return false;
-    }
-
     findUser(userName) {
+        this.base.closeAlert();
+
         if(userName == "" || userName == null) {
             this.filteredUsers = this.users;
         } else {
@@ -169,8 +159,8 @@ export class UserComponent implements OnInit {
                     this.filteredUsers.push(this.users[i]);
             }
             
-            if(!this.users.length)
-                console.log('Nenhum usuário encontrado');
+            if(!this.filteredUsers.length)
+                this.base.setAlert("Nenhum usuário encontrado", "warning");
         }
     }
 }

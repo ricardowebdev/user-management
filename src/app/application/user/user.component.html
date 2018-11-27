@@ -1,6 +1,10 @@
+<app-alert [message]="base.alertMsg"
+           [type]="base.alertType"
+           (close)="base.closeAlert()"></app-alert><br>
+
 <section *ngIf="page == 'list'">
 	<div class="row">
-		<div class="col-md-1"></div>
+		<div class="col-md-1" id="top"></div>
 
 		<div class="col text-center">
 			<h1 class="text-center">Cadastro de Usuarios</h1>

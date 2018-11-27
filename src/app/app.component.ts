@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+	logged:   boolean;
+
+	listenToLogged(user) {
+		this.logged   = true;
+		window.localStorage.setItem("username", user.name);
+		window.localStorage.setItem("profile",  user.profile);
+	}
 }

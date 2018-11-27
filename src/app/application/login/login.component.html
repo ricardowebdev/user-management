@@ -1,0 +1,60 @@
+<app-alert [message]="base.alertMsg"
+           [type]="base.alertType"
+           (close)="base.closeAlert()"></app-alert>
+
+<div class="container-fluid">
+	<div class="row justify-content-md-center loginCard">
+		<div class="col-md-5">
+			<mdb-card>			
+			    <mdb-card-body>
+				    <mdb-card-title>
+				        <h4 class="text-center"><b>Login</b></h4>
+				    </mdb-card-title>
+
+			        <mdb-card-text>
+			        	<form [formGroup]="form">
+				        	<div class="row">
+				        		<div class="col-md-12">
+						        	<div class="md-form">
+						        		<input type="text" 
+						        			   id="email" 
+						        			   class="form-control"
+						        			   [formControl]="email"
+						        			   (keyup)="clearAlert()"
+						        			   mdbInputDirective />
+						        		<label for="email">E-mail</label>
+						        	</div>
+		                        </div>                        
+				        	</div><br>
+
+				        	<div class="row">
+				        		<div class="col-md-12">
+						        	<div class="md-form">
+						        		<input type="password" 
+						        		       class="form-control"
+						        		       id="password"
+						        		       [formControl]="password"
+						        		       (keyup)="clearAlert()"
+						        		       mdbInputDirective />
+						        		<label for="password">Senha</label>
+						        	</div>
+		                        </div>                        
+				        	</div><br>
+
+				        	<div class="row">
+				        		<div class="col-md-12">
+				        			<button mdbBtn 
+				        					mdbWavesEffect
+				        					class="btn btn-primary form-control"
+				        					(click)="login()">
+				        				<i class="fa fa-sign-in"></i> Entrar
+				        			</button>
+				        		</div>
+				        	</div><br>
+			        	</form>
+			    	</mdb-card-text>
+			  	</mdb-card-body>
+			</mdb-card>
+		</div>
+	</div>
+</div>
