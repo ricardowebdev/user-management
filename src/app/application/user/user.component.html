@@ -10,7 +10,7 @@
 			<h1 class="text-center">Cadastro de Usuarios</h1>
 		</div>
 
-		<div class="col-md-2 text-right">
+		<div class="col-md-2 text-right" *ngIf="userProfile == 1">
 			<button class="btn btn-primary btn-sm" (click)="changePage('single')">
 				<i class="fa fa-plus"></i> Adicionar
 			</button>
@@ -50,11 +50,12 @@
                                 </div>
                                 
 				        		<div class="col-md-4">
-									<b>Perfil: </b> {{ user.profile == 1 ? 'Administrador' : 'Usuário' }}		        			
+									<b>Perfil: </b> {{ user.profile == 1 ? 'Administrador' : 'Usuário' }}
 				        		</div>
 
-                                <div class="col-md-4">
-							    	<a class="btn btn-yellow btn-sm card-link" (click)="changePage('single'); selectUser(user)">
+                                <div class="col-md-4" *ngIf="userProfile == 1">
+							    	<a class="btn btn-yellow btn-sm card-link" 
+							    	   (click)="changePage('single'); selectUser(user)">
 							    		<i class="fa fa-edit"></i> Editar
 							    	</a>
 							    	<a class="btn btn-danger btn-sm card-link" 

@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
     users:         any;
     selectedUser:  any;
     filteredUsers: any;
+    userProfile:   number;
     page:          string;
     base = new Base();
 
@@ -22,8 +23,9 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
         this.page         = 'list';
-        this.selectedUser = {};
+        this.selectedUser = {};        
         this.loadUsers();
+        this.userProfile  = parseInt(window.localStorage.getItem('profile')) || 2;
     }
 
 	form = new FormGroup({
