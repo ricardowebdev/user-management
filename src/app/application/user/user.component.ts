@@ -29,7 +29,6 @@ export class UserComponent implements OnInit {
         ]),
 
         password: new FormControl('', [
-            Validators.required,
             Validators.minLength(3),
             Validators.maxLength(50),
         ]),
@@ -103,10 +102,6 @@ export class UserComponent implements OnInit {
         this.oldPassword.setValue(user.password);
     }
 
-    callDelete(user) {
-        this.selectUser = user;
-    }
-
     confirmDelete() {
         const result = this.service.removeUser(this.users, this.selectedUser);
 
@@ -120,7 +115,7 @@ export class UserComponent implements OnInit {
     }
 
     confirmForm() {
-        if (this.id.value !== null || this.id.value > 0) {
+        if (this.id.value !== null && this.id.value > 0) {
             const result = this.service.editUser(this.users, this.form.value);
 
             if (typeof(result) === 'string') {

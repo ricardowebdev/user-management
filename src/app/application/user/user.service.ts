@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http       } from '@angular/http';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-    constructor(private http: Http) { }
+    constructor() { }
 
     listUsers() {
         const users = [
@@ -52,10 +51,13 @@ export class UserService {
     }
 
     saveUser(users, user) {
+        const size = users.length;
+
         if (this.checkUnique(users, user.email)) {
             return 'Usuário já existe no sistema';
         }
 
+        user.id = size + 1;
         users.push(user);
         return users;
     }

@@ -47,18 +47,21 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        const users = this.service.listUsers();
-        const user  = users.find((instance) => instance.email === this.email.value);
+        const users         = this.service.listUsers();
+        const user          = users.find((instance) => instance.email === this.email.value);
 
         if (!user) {
-            return this.base.setAlert('Usuario não encontrado', 'danger');
+            this.base.setAlert('Usuario não encontrado', 'danger');
+            return false;
         }
 
         if (this.password.value !== user.password) {
-            return this.base.setAlert('Usuario ou senha inválido', 'danger');
+            this.base.setAlert('Usuario ou senha inválido', 'danger');
+            return false;
         }
 
         this.logged.emit(user);
+        return true;
     }
 
     clearAlert() {
