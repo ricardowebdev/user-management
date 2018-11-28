@@ -432,10 +432,10 @@ MIT
 @angular/router
 MIT
 
-@angular/http
+@angular/animations
 MIT
 
-@angular/animations
+@angular/http
 MIT
 
 core-js
