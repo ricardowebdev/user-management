@@ -1,6 +1,6 @@
 import { BrowserModule              } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { RouterModule               } from '@angular/router';
+import { RouterModule, Routes       } from '@angular/router';
 import { BrowserAnimationsModule    } from '@angular/platform-browser/animations';
 import { HttpModule                 } from '@angular/http';
 import { FormsModule,

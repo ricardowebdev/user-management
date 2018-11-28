@@ -58,7 +58,6 @@ describe('UserComponent', () => {
     	component.ngOnInit();
 
     	expect(component.page).toBe('list');
-    	expect(component.selectedUser).toEqual({});
     	expect(component.userProfile).toBe(1);
     });
 
@@ -89,7 +88,7 @@ describe('UserComponent', () => {
     	component.ngOnInit();
     	const size = component.users.length;
 
-    	component.selectUser(component.users[0]);
+    	component.selectUser(component.users[1]);
     	component.confirmDelete();
 
     	expect(component.users.length).toBe(size - 1);
@@ -110,7 +109,6 @@ describe('UserComponent', () => {
     	expect(component.base.alertMsg).not.toBe("");
     });   
 
-
     it('should test editing a user', () => {
      	component.ngOnInit();
 
@@ -119,8 +117,7 @@ describe('UserComponent', () => {
     	const password = '321654';
     	const profile  = 2;
 
-    	component.selectedUser = component.users[0];
-    	component.id.setValue(component.selectedUser.id);
+    	component.selectUser(component.users[0]);
     	component.name.setValue(name);
     	component.email.setValue(email);
     	component.oldPassword.setValue('123456');

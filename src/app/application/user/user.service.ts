@@ -37,12 +37,20 @@ export class UserService {
 
     removeUser(users, selectedUser) {
         try {
-            const id = users.indexOf(user => user.id === selectedUser.id);
-            if (!id) {
+            let found = -1;
+
+            for (let x = 0; x <= users.length; x++) {
+                if (users[x].id === selectedUser.id) {
+                    found = x;
+                    break;
+                }
+            }
+
+            if (found < 0) {
                 throw new Error('Usuário selecionado não encontrado');
             }
 
-            users.splice(id, 1);
+            users.splice(found, 1);
             return users;
 
         } catch (err) {

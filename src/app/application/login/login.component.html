@@ -50,7 +50,8 @@
 				        			<button mdbBtn 
 				        					mdbWavesEffect
 				        					class="btn btn-primary form-control"
-				        					(click)="login()">
+				        					(click)="login()"
+				        					[disabled]="form.invalid">
 				        				<i class="fa fa-sign-in"></i> Entrar
 				        			</button>
 				        		</div>

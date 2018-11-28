@@ -59,7 +59,7 @@
 							    		<i class="fa fa-edit"></i> Editar
 							    	</a>
 							    	<a class="btn btn-danger btn-sm card-link" 
-							    	   (click)="selectUser = user; basicModal.show()">
+							    	   (click)="selectUser(user); basicModal.show()">
 							    		<i class="fa fa-trash"></i> Deletar
 							    	</a>							
 								</div>		        		
@@ -143,11 +143,14 @@
 
 				    	<div class="row justify-content-right">
 				    		<div class="col-md-12 text-right">
-						    	<a class="btn btn-danger btn-sm" (click)="changePage('list')">
+						    	<a class="btn btn-danger btn-sm" 
+						    	   (click)="changePage('list')">
 						    		<i class="fa fa-arrow-left"></i> Voltar
 						    	</a>			    			
 
-						    	<a class="btn btn-success btn-sm" (click)="confirmForm()">
+						    	<a class="btn btn-success btn-sm" 
+						    	   (click)="confirmForm()"
+						    	   [disabled]="form.invalid">
 						    		<i class="fa fa-check"></i> Confirmar
 						    	</a>
 				    		</div>			    		

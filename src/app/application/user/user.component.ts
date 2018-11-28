@@ -13,7 +13,6 @@ import { Base              } from '../../common/base.class';
 })
 export class UserComponent implements OnInit {
     users:         any;
-    selectedUser:  any;
     filteredUsers: any;
     userProfile:   number;
     page:          string;
@@ -53,7 +52,6 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
         this.page         = 'list';
-        this.selectedUser = {};
         this.loadUsers();
         this.userProfile  = parseInt(window.localStorage.getItem('profile'), 2) || 2;
     }
@@ -103,7 +101,7 @@ export class UserComponent implements OnInit {
     }
 
     confirmDelete() {
-        const result = this.service.removeUser(this.users, this.selectedUser);
+        const result = this.service.removeUser(this.users, this.form.value);
 
         if (typeof(result) === 'string') {
             this.base.setAlert(result, 'danger');
