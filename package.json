@@ -1,7 +1,7 @@
 {
-  "name": "mdb-angular-free",
-  "version": "7.0.0",
-  "license": "MIT",
+  "name": "user-management",
+  "version": "1.0.0",
+  "license": "Ricardo dos Santos Souza",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
