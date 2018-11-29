@@ -7,7 +7,7 @@
 		<div class="col-md-1" id="top"></div>
 
 		<div class="col text-center">
-			<h1 class="text-center">Cadastro de Usuarios</h1>
+			<h1 class="text-center">Cadastro de Usuários</h1>
 		</div>
 
 		<div class="col-md-2 text-right" *ngIf="userProfile == 1">
@@ -98,10 +98,21 @@
 								    <input mdbInputDirective 
 								    	   type="text" 
 								    	   id="name" 
-								    	   class="form-control" 
+										   class="form-control"
+										   maxlength="50"
 								    	   [formControl]="name" />
-								    <label for="name">Nome</label>
+								    <label for="name">Nome <span class="star-required">*</span></label>
 								</div>
+                                <div *ngIf="name.invalid && name.touched">
+                                    <div class="alert alert-danger">
+                                        <div *ngIf="name.errors.required">
+                                            Este campo é obrigatório
+										</div>
+                                        <div *ngIf="name.errors.minlength">
+                                            Este campo deve ter no minimo 3 caracteres
+                                        </div>										
+                                    </div>
+                                </div>
 							</div>
 
 						    <div class="col-md-4">
@@ -109,16 +120,30 @@
                                     <input mdbInputDirective 
                                             type="email" 
                                             id="email" 
-                                            class="form-control" 
+											class="form-control" 
+											maxlength="100"
                                             [formControl]="email" />
-                                    <label for="email">E-mail</label>
-                                </div>        
+                                    <label for="email">E-mail <span class="star-required">*</span></label>
+								</div>
+                                <div *ngIf="email.invalid && email.touched">
+                                    <div class="alert alert-danger">
+                                        <div *ngIf="email.errors.required">
+                                            Este campo é obrigatório
+										</div>
+                                        <div *ngIf="email.errors.minlength">
+                                            Este campo deve ter no minimo 5 caracteres
+										</div>
+                                        <div *ngIf="email.errors.email">
+                                            E-mail inválido
+                                        </div>										
+                                    </div>
+                                </div>								
 						  	</div>
 						</div><br>
 
 						<div class="row">
 							<div class="col-md-4">
-                                <label for="profile">Profile</label>								
+                                <label for="profile">Profile <span class="star-required">*</span></label>								
                                 <select name="profile" 
                                         id="profile" 
                                         class="form-control"
@@ -126,7 +151,14 @@
                                     <option value="">Selecione</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Usuario</option>
-                                </select>
+								</select>
+                                <div *ngIf="profile.invalid && profile.touched">
+									<div class="alert alert-danger">
+										<div *ngIf="profile.errors.required">
+											Este campo é obrigatório
+										</div>
+									</div>
+								</div>								
 							</div>
 
 							<div class="col-md-4">
@@ -136,8 +168,18 @@
 								    	   id="password" 
 								    	   class="form-control" 
 								    	   [formControl]="password" />
-								    <label for="password">Password</label>								
+								    <label for="password">Password</label>
 								</div>
+                                <div *ngIf="profile.invalid && profile.touched">
+									<div class="alert alert-danger">
+										<div *ngIf="password-required">
+											Preencha uma senha
+										</div>										
+										<div *ngIf="password.minlength">
+											Este campo deve ter no minimo 3 caracteres
+										</div>
+									</div>
+								</div>									
 							</div>
 						</div>
 
@@ -148,14 +190,15 @@
 						    		<i class="fa fa-arrow-left"></i> Voltar
 						    	</a>			    			
 
-						    	<a class="btn btn-success btn-sm" 
-						    	   (click)="confirmForm()"
-						    	   [disabled]="form.invalid">
-						    		<i class="fa fa-check"></i> Confirmar
-						    	</a>
+								<button mdbBtn 
+										mdbWavesEffect
+										class="btn btn-success btn-sm"
+										(click)="confirmForm()"
+										[disabled]="form.invalid">
+									<i class="fa fa-check"></i> Confirmar
+								</button>
 				    		</div>			    		
-                        </div>
-                        						
+						</div>						
 					</form>
 			    </mdb-card-body>
 			</mdb-card>

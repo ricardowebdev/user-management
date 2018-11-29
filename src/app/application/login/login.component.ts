@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
         email: new FormControl('', [
             Validators.required,
             Validators.minLength(5),
+            Validators.maxLength(100),
             Validators.email
         ]),
     });
@@ -47,8 +48,8 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        const users         = this.service.listUsers();
-        const user          = users.find((instance) => instance.email === this.email.value);
+        const users = this.service.listUsers();
+        const user  = users.find((instance) => instance.email === this.email.value);
 
         if (!user) {
             this.base.setAlert('Usuario não encontrado', 'danger');

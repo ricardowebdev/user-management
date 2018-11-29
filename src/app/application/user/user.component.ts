@@ -44,6 +44,7 @@ export class UserComponent implements OnInit {
         email: new FormControl('', [
             Validators.required,
             Validators.minLength(5),
+            Validators.maxLength(100),
             Validators.email
         ]),
     });
@@ -124,6 +125,19 @@ export class UserComponent implements OnInit {
                 this.changePage('list');
             }
         } else {
+            /*
+            *
+            * Validando a senha no caso de inserção
+            * A senha foi feita desse jeito por motivos de uma integração
+            * com o backend pode pedir que a senha seja transformada em hash
+            *
+            */
+            if (this.password.value === '' || this.password.value === null) {
+                this.base.setAlert('Insira uma senha válida', 'danger');
+                document.getElementById('password').focus();
+                return false;
+            }
+
             const result = this.service.saveUser(this.users, this.form.value);
 
             if (typeof(result) === 'string') {

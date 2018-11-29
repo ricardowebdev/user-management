@@ -1,6 +1,7 @@
 $magin:      0;
 $padding:    0;
 $background: #eeeeee;
+$danger:     #ff0000;
 
 body {
     margin:  $magin;
@@ -12,4 +13,8 @@ body {
     width:   100%;
     margin:  $magin;
     padding: $padding;
+}
+
+.star-required {
+    color: $danger;
 }

@@ -1,45 +1,43 @@
 <section *ngIf="logged">
-    <div class="container-fluid full">
-        <div class="row">
-            <div class="col-12">
-                <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo scrolling-navbar text-left">
-                    <mdb-navbar-brand>
-                        <a class="navbar-brand" 
-                           routerLink="/dashboard">
-                            <i class="fa fa-user"></i> Gerenciamento de Usuários
-                        </a>
-                    </mdb-navbar-brand>
+    <div class="row">
+        <div class="col-12">
+            <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo scrolling-navbar text-left">
+                <mdb-navbar-brand>
+                    <a class="navbar-brand" 
+                        routerLink="/dashboard">
+                        <i class="fa fa-user"></i> Gerenciamento de Usuários
+                    </a>
+                </mdb-navbar-brand>
 
-                    <links>
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item" [routerLinkActive]="'active'">
-                                <a class="nav-link waves-light" 
-                                   routerLink="/dashboard"                                    
-                                   mdbWavesEffect>
-                                    Dashboard
-                                </a>
-                            </li>
-                            
-                            <li class="nav-item" [routerLinkActive]="'active'">
-                                <a class="nav-link waves-light" 
-                                   routerLink="/users"                                    
-                                   mdbWavesEffect>
-                                    Usuarios
-                                </a>
-                            </li>
-                        </ul>
-                        <span class="navbar-text white-text text-right">
-                            <a class="btn btn-danger btn-sm" (click)="logout()">
-                                <i class="fa fa-sign-out"></i> Sair
+                <links>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item" [routerLinkActive]="'active'">
+                            <a class="nav-link waves-light" 
+                                routerLink="/dashboard"                                    
+                                mdbWavesEffect>
+                                Dashboard
                             </a>
-                        </span>        
-                    </links>
+                        </li>
+                        
+                        <li class="nav-item" [routerLinkActive]="'active'">
+                            <a class="nav-link waves-light" 
+                                routerLink="/users"                                    
+                                mdbWavesEffect>
+                                Usuarios
+                            </a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text white-text text-right">
+                        <a class="btn btn-danger btn-sm" (click)="logout()">
+                            <i class="fa fa-sign-out"></i> Sair
+                        </a>
+                    </span>        
+                </links>
 
-                </mdb-navbar>           
-            </div>
+            </mdb-navbar>           
         </div>
-        <router-outlet></router-outlet>    
-    </div>    
+    </div>
+    <router-outlet></router-outlet>
 </section>
 
 <section *ngIf="!logged">
