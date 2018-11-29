@@ -6,18 +6,18 @@ describe('DashboardComponent', () => {
     let component: DashboardComponent;
 
     beforeEach(() => {
-    	component = new DashboardComponent();
+        component = new DashboardComponent();
     });
 
     it('should create', () => {
-    	expect(component).toBeTruthy();
+        expect(component).toBeTruthy();
     });
 
     it('should get the username in localstorage', () => {
-    	window.localStorage.setItem('username', 'test');
+        window.localStorage.setItem('username', 'test');
 
-    	component.ngOnInit();
+        component.ngOnInit();
 
-    	expect(component.username).toBe('test');
+        expect(component.username).toBe('test');
     });
 });

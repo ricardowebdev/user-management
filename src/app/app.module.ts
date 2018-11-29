@@ -2,7 +2,6 @@ import { BrowserModule              } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes       } from '@angular/router';
 import { BrowserAnimationsModule    } from '@angular/platform-browser/animations';
-import { HttpModule                 } from '@angular/http';
 import { FormsModule,
          ReactiveFormsModule        } from '@angular/forms';
 
@@ -28,7 +27,6 @@ import { LoginComponent             } from './application/login/login.component'
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
     SharedModule
   ],
   providers: [],
