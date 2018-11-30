@@ -8,10 +8,10 @@ import { FormsModule,
 import { MDBBootstrapModule         } from 'angular-bootstrap-md';
 import { AppComponent               } from './app.component';
 import { SharedModule               } from './shared/shared.module';
-import { UserComponent              } from './application/user/user.component';
-import { DashboardComponent         } from './application/dashboard/dashboard.component';
 import { appRoutes                  } from './common/app.routing';
 import { LoginComponent             } from './application/login/login.component';
+import { UserComponent              } from './application/user/user.component';
+import { DashboardComponent         } from './application/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [

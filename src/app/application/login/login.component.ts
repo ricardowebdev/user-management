@@ -15,14 +15,14 @@ import { Base         } from '../../common/base.class';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     base = new Base();
     @Output() logged = new EventEmitter();
 
     form = new FormGroup({
         password: new FormControl('', [
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(5),
             Validators.maxLength(50),
         ]),
 
@@ -43,9 +43,6 @@ export class LoginComponent implements OnInit {
     }
 
     constructor(private service: UserService) { }
-
-    ngOnInit() {
-    }
 
     login() {
         const users = this.service.listUsers();

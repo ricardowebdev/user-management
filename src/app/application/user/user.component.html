@@ -2,26 +2,15 @@
            [type]="base.alertType"
            (close)="base.closeAlert()"></app-alert><br>
 
-<section *ngIf="page == 'list'">
-	<div class="row">
-		<div class="col-md-1" id="top"></div>
-
-		<div class="col text-center">
+<section *ngIf="page == 'list'" id="top">
+	<div class="row justify-content-md-center">
+		<div class="col-md-12 text-center">
 			<h1 class="text-center">Cadastro de Usuários</h1>
 		</div>
-
-		<div class="col-md-2 text-right" *ngIf="userProfile == 1">
-			<button class="btn btn-primary btn-sm" (click)="changePage('single')">
-				<i class="fa fa-plus"></i> Adicionar
-			</button>
-		</div>	
-
-		<div class="col-md-1"></div>
-    </div><br>
+	</div>
     
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-4">            
+    <div class="row justify-content-md-center">
+        <div class="col-md-5 text-right">            
             <div class="md-form">
                 <input mdbInputDirective
                        type="text"
@@ -32,7 +21,13 @@
                        (keyup)="findUser(userSearch.value)" />
                 <label for="userSearch"><i class="fa fa-search"></i> Buscar por nome</label>
             </div>
-        </div>
+		</div>
+		<div class="col-md-5 text-right">
+			<br>
+			<button *ngIf="userProfile == 1" class="btn btn-primary btn-sm" (click)="changePage('single')">
+				<i class="fa fa-plus"></i> Adicionar
+			</button>	
+		</div>			
     </div>
 
 	<div *ngFor="let user of filteredUsers">
@@ -54,7 +49,7 @@
 				        		</div>
 
                                 <div class="col-md-4" *ngIf="userProfile == 1">
-							    	<a class="btn btn-yellow btn-sm card-link" 
+							    	<a class="btn btn-secondary btn-sm card-link" 
 							    	   (click)="changePage('single'); selectUser(user)">
 							    		<i class="fa fa-edit"></i> Editar
 							    	</a>
@@ -109,7 +104,7 @@
                                             Este campo é obrigatório
 										</div>
                                         <div *ngIf="name.errors.minlength">
-                                            Este campo deve ter no minimo 3 caracteres
+                                            Este campo deve ter no minimo 5 caracteres
                                         </div>										
                                     </div>
                                 </div>
@@ -143,14 +138,13 @@
 
 						<div class="row">
 							<div class="col-md-4">
-                                <label for="profile">Profile <span class="star-required">*</span></label>								
+                                <label for="profile">Perfil <span class="star-required">*</span></label>								
                                 <select name="profile" 
                                         id="profile" 
                                         class="form-control"
-                                        [formControl]="profile">
-                                    <option value="">Selecione</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Usuario</option>
+										[formControl]="profile">
+									<option value="2">Usuario</option>
+									<option value="1">Administrador</option>
 								</select>
                                 <div *ngIf="profile.invalid && profile.touched">
 									<div class="alert alert-danger">
@@ -166,17 +160,15 @@
 								    <input mdbInputDirective 
 								    	   type="password" 
 								    	   id="password" 
-								    	   class="form-control" 
+										   class="form-control"
+										   (keyup)="validPass()"
 								    	   [formControl]="password" />
 								    <label for="password">Password</label>
 								</div>
-                                <div *ngIf="profile.invalid && profile.touched">
+                                <div *ngIf="password.invalid && password.touched">
 									<div class="alert alert-danger">
-										<div *ngIf="password-required">
-											Preencha uma senha
-										</div>										
-										<div *ngIf="password.minlength">
-											Este campo deve ter no minimo 3 caracteres
+										<div *ngIf="password.errors.minlength">
+											Este campo deve ter no minimo 5 caracteres
 										</div>
 									</div>
 								</div>									

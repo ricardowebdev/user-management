@@ -23,21 +23,21 @@ export class UserComponent implements OnInit {
 
         name: new FormControl('', [
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(5),
             Validators.maxLength(50)
         ]),
 
         password: new FormControl('', [
-            Validators.minLength(3),
+            Validators.minLength(5),
             Validators.maxLength(50),
         ]),
 
         oldPassword: new FormControl('', [
-            Validators.minLength(3),
+            Validators.minLength(5),
             Validators.maxLength(50),
         ]),
 
-        profile: new FormControl('', [
+        profile: new FormControl('' , [
             Validators.required
         ]),
 
@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
     constructor(private service: UserService) { }
 
     ngOnInit() {
-        this.page         = 'list';
+        this.page = 'list';
         this.loadUsers();
         this.userProfile  = parseInt(window.localStorage.getItem('profile'), 2) || 2;
     }
@@ -133,7 +133,7 @@ export class UserComponent implements OnInit {
             *
             */
             if (this.password.value === '' || this.password.value === null) {
-                this.base.setAlert('Insira uma senha válida', 'danger');
+                this.base.setAlert('Para cadastrar um novo usuario uma senha é necessaria', 'danger');
                 document.getElementById('password').focus();
                 return false;
             }
