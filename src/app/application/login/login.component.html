@@ -29,17 +29,17 @@
 						        		<label for="email">E-mail <span class="star-required">*</span></label>
 									</div>
 									<div *ngIf="email.invalid && email.touched">
-										<div class="alert alert-danger">
-											<div *ngIf="email.errors.required">
+										<p class="validation-msg">
+											<span *ngIf="email.errors.required">
 												Este campo é obrigatório
-											</div>
-											<div *ngIf="email.errors.minlength">
+											</span>
+											<span *ngIf="email.errors.minlength">
 												Este campo deve ter no minimo 5 caracteres
-											</div>
-											<div *ngIf="email.errors.email">
+											</span>
+											<span *ngIf="email.errors.email">
 												E-mail inválido
-											</div>										
-										</div>
+											</span>										
+										</p>
 									</div>									
 		                        </div>                        
 				        	</div><br>
@@ -56,14 +56,14 @@
 						        		<label for="password">Senha <span class="star-required">*</span></label>
 									</div>
 									<div *ngIf="password.invalid && password.touched">
-										<div class="alert alert-danger">
-											<div *ngIf="password.errors.required">
+										<p class="validation-msg">
+											<span *ngIf="password.errors.required">
 												Este campo é obrigatório
-											</div>
-											<div *ngIf="password.errors.minlength">
+											</span>
+											<span *ngIf="password.errors.minlength">
 												Este campo deve ter no minimo 5 caracteres
-											</div>										
-										</div>
+											</span>										
+										</p>
 									</div>									
 		                        </div>                        
 				        	</div><br>

@@ -2,14 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl,
          FormGroup,
          Validators        } from '@angular/forms';
+import { trigger,
+         style,
+         animate,
+         transition,       } from '@angular/animations';
 
 import { UserService       } from './user.service';
 import { Base              } from '../../common/base.class';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+    selector: 'app-user',
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.scss'],
+    animations: [
+        trigger('fade', [
+            transition('void => *', [
+                style({ opacity: 0 }),
+                animate(500)
+            ])
+        ])
+    ]
 })
 export class UserComponent implements OnInit {
     users:         any;

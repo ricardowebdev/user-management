@@ -30,7 +30,7 @@
 		</div>			
     </div>
 
-	<div *ngFor="let user of filteredUsers">
+	<div *ngFor="let user of filteredUsers" @fade>
 		<div class="row justify-content-center">	
 			<div class="col-md-10">
 				<mdb-card>
@@ -99,7 +99,7 @@
 								    <label for="name">Nome <span class="star-required">*</span></label>
 								</div>
                                 <div *ngIf="name.invalid && name.touched">
-                                    <div class="alert alert-danger">
+                                    <div class="validation-msg">
                                         <div *ngIf="name.errors.required">
                                             Este campo é obrigatório
 										</div>
@@ -121,7 +121,7 @@
                                     <label for="email">E-mail <span class="star-required">*</span></label>
 								</div>
                                 <div *ngIf="email.invalid && email.touched">
-                                    <div class="alert alert-danger">
+                                    <div class="validation-msg">
                                         <div *ngIf="email.errors.required">
                                             Este campo é obrigatório
 										</div>
@@ -147,7 +147,7 @@
 									<option value="1">Administrador</option>
 								</select>
                                 <div *ngIf="profile.invalid && profile.touched">
-									<div class="alert alert-danger">
+									<div class="validation-msg">
 										<div *ngIf="profile.errors.required">
 											Este campo é obrigatório
 										</div>
@@ -166,7 +166,7 @@
 								    <label for="password">Password</label>
 								</div>
                                 <div *ngIf="password.invalid && password.touched">
-									<div class="alert alert-danger">
+									<div class="validation-msg">
 										<div *ngIf="password.errors.minlength">
 											Este campo deve ter no minimo 5 caracteres
 										</div>
