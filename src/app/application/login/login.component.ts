@@ -2,7 +2,7 @@ import { Component    } from '@angular/core';
 import { FormControl,
          FormGroup,
          Validators   } from '@angular/forms';
-import { Router       } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService  } from '../../common/auth.service';
 import { Base         } from '../../common/base.class';
@@ -40,7 +40,8 @@ export class LoginComponent {
 
     constructor(
         private service: AuthService,
-        private router: Router) { }
+        private router: Router,
+        private route: ActivatedRoute) { }
 
     login() {
         const login = this.service.login(this.form.value);
@@ -50,7 +51,8 @@ export class LoginComponent {
             return false;
         }
 
-        this.router.navigate(['/dashboard']);
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+        this.router.navigate([returnUrl || '/dashboard']);
         return true;
     }
 
