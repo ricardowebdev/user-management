@@ -1,11 +1,10 @@
-import { Component,
-         Output,
-         EventEmitter } from '@angular/core';
+import { Component    } from '@angular/core';
 import { FormControl,
          FormGroup,
          Validators   } from '@angular/forms';
+import { Router       } from '@angular/router';
 
-import { UserService  } from '../user/user.service';
+import { AuthService  } from '../../common/auth.service';
 import { Base         } from '../../common/base.class';
 
 @Component({
@@ -15,7 +14,6 @@ import { Base         } from '../../common/base.class';
 })
 export class LoginComponent {
     base = new Base();
-    @Output() logged = new EventEmitter();
 
     form = new FormGroup({
         password: new FormControl('', [
@@ -40,23 +38,19 @@ export class LoginComponent {
         return this.form.get('email');
     }
 
-    constructor(private service: UserService) { }
+    constructor(
+        private service: AuthService,
+        private router: Router) { }
 
     login() {
-        const users = this.service.listUsers();
-        const user  = users.find((instance) => instance.email === this.email.value);
+        const login = this.service.login(this.form.value);
 
-        if (!user) {
-            this.base.setAlert('Usuario não encontrado', 'danger');
+        if (!login.logged) {
+            this.base.setAlert(login.message, 'danger');
             return false;
         }
 
-        if (this.password.value !== user.password) {
-            this.base.setAlert('Usuario ou senha inválido', 'danger');
-            return false;
-        }
-
-        this.logged.emit(user);
+        this.router.navigate(['/dashboard']);
         return true;
     }
 

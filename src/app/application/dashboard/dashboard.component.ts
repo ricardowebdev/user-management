@@ -21,6 +21,6 @@ export class DashboardComponent implements OnInit {
     username: string;
 
     ngOnInit() {
-        this.username = window.localStorage.getItem('username');
+        this.username = atob(window.localStorage.getItem('username'));
     }
 }

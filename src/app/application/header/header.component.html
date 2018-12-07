@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-12">
+        <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo scrolling-navbar text-left">
+            <links>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" [routerLinkActive]="'active'">
+                        <a class="nav-link waves-light" 
+                           routerLink="/dashboard"                                    
+                           mdbWavesEffect>
+                           Dashboard
+                        </a>
+                    </li>
+                  
+                    <li class="nav-item" [routerLinkActive]="'active'">
+                        <a class="nav-link waves-light" 
+                           routerLink="/users"                                    
+                           mdbWavesEffect>
+                           Usuários
+                        </a>
+                    </li>
+                </ul>
+                <span class="navbar-text white-text text-right">
+                    <a class="btn btn-danger btn-sm" (click)="logout()">
+                        <i class="fa fa-sign-out"></i> Sair
+                    </a>
+                </span>        
+            </links>
+        </mdb-navbar>           
+    </div>
+</div>

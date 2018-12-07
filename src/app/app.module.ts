@@ -12,13 +12,15 @@ import { appRoutes                  } from './common/app.routing';
 import { LoginComponent             } from './application/login/login.component';
 import { UserComponent              } from './application/user/user.component';
 import { DashboardComponent         } from './application/dashboard/dashboard.component';
+import { HeaderComponent } from './application/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

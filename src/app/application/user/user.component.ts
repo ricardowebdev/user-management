@@ -66,7 +66,11 @@ export class UserComponent implements OnInit {
     ngOnInit() {
         this.page = 'list';
         this.loadUsers();
-        this.userProfile  = parseInt(window.localStorage.getItem('profile'), 2) || 2;
+
+        let profile = localStorage.getItem('profile');
+        profile     = atob(profile);
+
+        this.userProfile = parseInt(profile, 2) || 2;
     }
 
     get id() {
